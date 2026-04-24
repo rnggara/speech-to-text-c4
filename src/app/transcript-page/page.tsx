@@ -4,14 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
-import { clearSession } from "@/redux/slices/sessionSlice";
 import { useAssemblyAI } from "@/hooks/useAssemblyAI";
 import { Mic, MicOff, Send, RotateCcw, Building2, Hash, AlertCircle, LogOut, User } from "lucide-react";
+import { clearMom } from "@/redux/slices/momSessionSlice";
 
 export default function TranscriptPage() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { mom_code: meetingCode, floor } = useSelector((state: RootState) => state.session);
+  const { mom_code: meetingCode, floor } = useSelector((state: RootState) => state.momSession);
+  const { token } = useSelector((state: RootState) => state.session);
   const { 
     transcript, 
     partialTranscript, 
@@ -47,7 +48,7 @@ export default function TranscriptPage() {
 
   const handleExit = () => {
     if (confirm("Apakah Anda yakin ingin keluar dari sesi ini? Semua data yang belum disimpan akan hilang.")) {
-      dispatch(clearSession());
+      dispatch(clearMom());
       resetTranscript();
       router.push("/");
     }
@@ -61,6 +62,7 @@ export default function TranscriptPage() {
         mom_code: meetingCode,
         floor: floor,
         transcript: transcript.trim(),
+        token,
       };
       
       console.log("Submitting payload:", payload);
@@ -77,7 +79,7 @@ export default function TranscriptPage() {
       console.log(data)
       if (data.success) {
         alert("Transcript submitted successfully!");
-        dispatch(clearSession());
+        dispatch(clearMom());
         resetTranscript();
         router.push("/");
       } else {

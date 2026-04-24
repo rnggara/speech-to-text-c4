@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SessionState {
-  mom_code: string;
-  floor: string;
+  username: string;
+  token: string;
 }
 
 const initialState: SessionState = {
-  mom_code: '',
-  floor: '',
+  username: '',
+  token: '',
 };
 
 const sessionSlice = createSlice({
@@ -15,15 +15,15 @@ const sessionSlice = createSlice({
   initialState,
   reducers: {
     setSession: (state, action: PayloadAction<SessionState>) => {
-      state.mom_code = action.payload.mom_code;
-      state.floor = action.payload.floor;
+      state.username = action.payload.username;
+      state.token = action.payload.token;
     },
-    clearSession: (state) => {
-      state.mom_code = '';
-      state.floor = '';
+    logout: (state) => {
+      state.token = '';
+      state.username = '';
     },
   },
 });
 
-export const { setSession, clearSession } = sessionSlice.actions;
+export const { setSession, logout } = sessionSlice.actions;
 export default sessionSlice.reducer;

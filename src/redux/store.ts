@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import sessionReducer from './slices/sessionSlice';
+import momSessionReducer from './slices/momSessionSlice';
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -11,6 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  momSession: momSessionReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 export async function POST(req: Request) {
   try {
     const body = await req.json()
-    const { mom_code } = body
-    const response = await fetch(`${apiUrl}/mom/check`, {
+    const { mom_code, token } = body
+    const response = await fetch(`${apiUrl}/mom/check?token=${token}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
