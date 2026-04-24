@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setSession } from "@/redux/slices/sessionSlice";
 import { Mic, ArrowRight } from "lucide-react";
-import { CgSpinner } from "react-icons/cg";
 
 export default function Home() {
   const [username, setUsername] = useState("");

@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, setSession } from "@/redux/slices/sessionSlice";
 import { Mic, ArrowRight, LogOut } from "lucide-react";
-import { CgSpinner } from "react-icons/cg";
 import { setMom } from "@/redux/slices/momSessionSlice";
 import { RootState } from "@/redux/store";
 
