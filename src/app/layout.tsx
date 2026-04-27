@@ -7,7 +7,7 @@ import ReduxProvider from "@/redux/ReduxProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MoM Transcriber",
+  title: "Cypher Mom Notulen",
   description: "Real-time Meeting Minutes Transcriber using AssemblyAI",
 };
 

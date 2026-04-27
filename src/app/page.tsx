@@ -10,9 +10,7 @@ import { RootState } from "@/redux/store";
 
 export default function Home() {
   const [code, setCode] = useState("");
-  const [floor, setFloor] = useState("");
   const [errorCode, setErrorCode] = useState("");
-  const [errorFloor, setErrorFloor] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
   const [onSubmit, setOnSubmit] = useState(false);
@@ -29,13 +27,9 @@ export default function Home() {
     if (!code) {
       setErrorCode("Please enter a mom code")
     }
-    if (!floor) {
-      setErrorFloor("Please enter a floor")
-    }
-    if(code && floor && !onSubmit){
+    if(code && !onSubmit){
       setOnSubmit(true)
       try {
-        // Check mom code
         const response = await fetch("/api/check-mom", {
           method: "POST",
           headers: {
@@ -50,7 +44,7 @@ export default function Home() {
         setOnSubmit(false)
         console.log(data)
         if (data.success) {
-          dispatch(setMom({ mom_code: code, floor }));
+          dispatch(setMom({ mom_code: code, attendance: data.data?.attendance || [] }));
           router.push("/transcript-page");
         } else {
           setErrorCode(data.message)
@@ -85,7 +79,7 @@ export default function Home() {
               </div>
               <button 
                 onClick={handleExit}
-                className="btn flex items-center justify-center btn-outline btn-error btn-sm gap-2"
+                className="btn flex items-center transition ease-in-out hover:-translate-y-1 hover:scale-110 justify-center btn-outline btn-error btn-sm gap-2"
               >
                 <LogOut className="w-4 h-4" />
                 Keluar
@@ -93,7 +87,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-4xl font-black text-base-content tracking-tight mb-3">
-              Notulen<span className="text-primary">.</span>
+              Cypher Mom<span className="text-primary">.</span>
             </h1>
             <p className="text-base-content/60 font-medium mb-12 bg-blue-500 text-white p-10 uppercase">
               Meeting Code bisa anda dapatkan dari CYPHER - MOM, disebelah Meeting Number.
@@ -115,26 +109,11 @@ export default function Home() {
                   />
                   {errorCode && <p className="text-red-500 text-xs">{errorCode}</p>}
                 </div>
-
-                <div className="form-control w-full">
-                  <label className="label">
-                    <span className="label-text font-bold text-base-content/50 uppercase tracking-widest text-xs">Speaker</span>
-                  </label>
-                  <input
-                    id="floor"
-                    type="text"
-                    placeholder="Nama speaker"
-                    className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base border outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
-                    value={floor}
-                    onChange={(e) => setFloor(e.target.value)}
-                  />
-                  {errorFloor && <p className="text-red-500 text-xs">{errorFloor}</p>}
-                </div>
               </div>
 
               <button
                 type="submit"
-                className={`btn flex items-center justify-center btn-primary btn-lg w-full shadow-xl shadow-primary/20 gap-3 text-lg h-[4.5rem] rounded-2xl group ${onSubmit ? "btn-disabled" : ""}`}
+                className={`btn flex items-center transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 justify-center btn-primary btn-lg w-full shadow-xl shadow-primary/20 gap-3 text-lg h-[4.5rem] rounded-2xl group ${onSubmit ? "btn-disabled" : ""}`}
               >
                 {onSubmit ? (<>
                   <span>Loading...</span>

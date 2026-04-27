@@ -12,6 +12,7 @@ interface UseAssemblyAIReturn {
   stopListening: () => Promise<void>;
   resetTranscript: () => void;
   error: string | null;
+  speakerLabel: string | null;
 }
 
 export function useAssemblyAI(): UseAssemblyAIReturn {
@@ -19,6 +20,7 @@ export function useAssemblyAI(): UseAssemblyAIReturn {
   const [partialTranscript, setPartialTranscript] = useState("");
   const [isListening, setIsListening] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [speakerLabel, setSpeakerLabel] = useState<string | null>(null);
   
   const transcriberRef = useRef<StreamingTranscriber | null>(null);
   const recorderRef = useRef<RecordRTC | null>(null);
@@ -49,7 +51,8 @@ export function useAssemblyAI(): UseAssemblyAIReturn {
         sampleRate: 16000,
         // @ts-ignore - speechModel is used to specify whisper-rt
         speechModel: "whisper-rt",
-        
+        // @ts-ignore - speakerLabels enables speaker diarization
+        speakerLabels: true,
       });
 
       transcriberRef.current = transcriber;
@@ -59,6 +62,7 @@ export function useAssemblyAI(): UseAssemblyAIReturn {
       transcriber.on("turn", (message: any) => {
         console.log("Streaming turn:", message);
         if (message.utterance && message.language_code == "id") {
+          setSpeakerLabel(message.speaker || null);
           setTranscript((prev) => prev + " " + message.utterance);
           setPartialTranscript("");
         }
@@ -151,6 +155,7 @@ export function useAssemblyAI(): UseAssemblyAIReturn {
   const resetTranscript = () => {
     setTranscript("");
     setPartialTranscript("");
+    setSpeakerLabel(null);
   };
 
   return {
@@ -161,5 +166,6 @@ export function useAssemblyAI(): UseAssemblyAIReturn {
     stopListening,
     resetTranscript,
     error,
+    speakerLabel,
   };
 }

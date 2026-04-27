@@ -86,7 +86,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-4xl font-black text-base-content tracking-tight mb-3">
-              Notulen<span className="text-primary">.</span>
+              Cypher Mom Notulen<span className="text-primary">.</span>
             </h1>
 
             <form onSubmit={handleSubmit} className="w-full space-y-8">
@@ -124,7 +124,7 @@ export default function Home() {
 
               <button
                 type="submit"
-                className={`btn flex items-center justify-center btn-primary btn-lg w-full shadow-xl shadow-primary/20 gap-3 text-lg h-[4.5rem] rounded-2xl group ${onSubmit ? "btn-disabled" : ""}`}
+                className={`btn flex items-center transition ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-100 justify-center btn-primary btn-lg w-full shadow-xl shadow-primary/20 gap-3 text-lg h-[4.5rem] rounded-2xl group ${onSubmit ? "btn-disabled" : ""}`}
               >
                 {onSubmit ? (<>
                   <span>Loading...</span>
