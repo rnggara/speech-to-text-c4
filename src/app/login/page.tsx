@@ -86,7 +86,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-4xl font-black text-base-content tracking-tight mb-3">
-              Cypher Mom Notulen<span className="text-primary">.</span>
+              CYPHER MOM NOTULEN
             </h1>
 
             <form onSubmit={handleSubmit} className="w-full space-y-8">

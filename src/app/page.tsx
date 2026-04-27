@@ -87,7 +87,7 @@ export default function Home() {
             </div>
             
             <h1 className="text-4xl font-black text-base-content tracking-tight mb-3">
-              Cypher Mom<span className="text-primary">.</span>
+              CYPHER MOM
             </h1>
             <p className="text-base-content/60 font-medium mb-12 bg-blue-500 text-white p-10 uppercase">
               Meeting Code bisa anda dapatkan dari CYPHER - MOM, disebelah Meeting Number.
