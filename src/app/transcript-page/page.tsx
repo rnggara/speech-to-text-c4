@@ -148,7 +148,7 @@ export default function TranscriptPage() {
     }
   };
 
-  if (!meetingCode || attendance.length === 0) return null;
+  if (!meetingCode) return null;
 
   return (
     <main className="flex min-h-screen flex-col bg-base-200">
