@@ -48,11 +48,8 @@ export default function Home() {
         })
         const data = await response.json()
         setOnSubmit(false)
-        console.log(data)
         if (data.success) {
-        //   dispatch(setSession({ mom_code: code, floor }));
           const user = data.data.user;
-          console.log(user)
           dispatch(setSession({username : user.username, token: data.data.token}))
           router.push("/");
         } else {

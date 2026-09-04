@@ -39,7 +39,7 @@ export default function TranscriptPage() {
   } = useAssemblyAI();
 
   useEffect(() => {
-    if (!meetingCode || attendance.length === 0) {
+    if (!meetingCode) {
       router.push("/");
     }
   }, [meetingCode, attendance, router]);
