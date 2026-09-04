@@ -42,7 +42,6 @@ export default function Home() {
         })
         const data = await response.json()
         setOnSubmit(false)
-        console.log(data)
         if (data.success) {
           dispatch(setMom({ mom_code: code, attendance: data.data?.attendance || [] }));
           router.push("/transcript-page");

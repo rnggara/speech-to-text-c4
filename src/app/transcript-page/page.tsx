@@ -126,8 +126,6 @@ export default function TranscriptPage() {
           token,
         };
 
-        console.log("Auto-posting summary:", postPayload);
-
         await fetch("/api/post-transcript", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

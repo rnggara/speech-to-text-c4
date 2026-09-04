@@ -20,7 +20,6 @@ export async function POST(req: Request) {
       }),
     })
     const data = await response.json()
-    console.log(data)
     return NextResponse.json(data)
   } catch (error: any) {
     console.error("Error posting transcript:", error);

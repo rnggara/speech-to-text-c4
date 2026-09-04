@@ -120,7 +120,6 @@ export function useAssemblyAI(): UseAssemblyAIReturn {
             const buffer = await blob.arrayBuffer();
             if (buffer.byteLength > 44) {
               const pcmData = buffer.slice(44);
-              // console.log(`Sending audio chunk: ${pcmData.byteLength} bytes`);
               transcriberRef.current.sendAudio(pcmData);
             }
           }
